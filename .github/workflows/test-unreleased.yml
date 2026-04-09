@@ -25,11 +25,11 @@ jobs:
           - { ruby_version: '3.3', opensearch_ref: 'main' }
 
     steps:
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@eab2afb99481ca09a4e91171a8e0aee0e89bfedd # v1.296.0
         with:
           ruby-version: ${{ matrix.entry.ruby_version }}
       - name: Checkout OpenSearch
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           repository: opensearch-project/OpenSearch
           ref: ${{ matrix.entry.opensearch_ref }}
@@ -42,7 +42,7 @@ jobs:
 
       - name: Restore cached build
         id: cache-restore
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@6f8efc29b200d32929f49075959781ed54ec270c # v3.5.0
         with:
           path: opensearch/distribution/archives/linux-tar/build/distributions
           key: ${{ steps.get-key.outputs.key }}
@@ -54,7 +54,7 @@ jobs:
 
       - name: Save cached build
         if: steps.cache-restore.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@6f8efc29b200d32929f49075959781ed54ec270c # v3.5.0
         with:
           path: opensearch/distribution/archives/linux-tar/build/distributions
           key: ${{ steps.get-key.outputs.key }}
@@ -79,7 +79,7 @@ jobs:
           exit 1
 
       - name: Checkout Ruby Client
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           path: ruby-client
 
@@ -97,7 +97,7 @@ jobs:
 
       - name: Save server logs
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
         with:
           name: opensearch-logs-${{ matrix.entry.opensearch_ref }}-ruby-${{ matrix.entry.ruby_version }}
           path: |
