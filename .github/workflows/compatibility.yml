@@ -33,7 +33,7 @@ jobs:
         with:
           cluster-version: ${{ matrix.cluster-version }}
           disable-security: true
-      - uses: ruby/setup-ruby@eab2afb99481ca09a4e91171a8e0aee0e89bfedd # v1.300.0
+      - uses: ruby/setup-ruby@eab2afb99481ca09a4e91171a8e0aee0e89bfedd # v1.296.0
         with:
           ruby-version: 3.3
       - name: Build and test with Rake
@@ -66,7 +66,7 @@ jobs:
         with:
           cluster-version: ${{ matrix.cluster-version }}
           disable-security: false
-      - uses: ruby/setup-ruby@eab2afb99481ca09a4e91171a8e0aee0e89bfedd # v1.300.0
+      - uses: ruby/setup-ruby@eab2afb99481ca09a4e91171a8e0aee0e89bfedd # v1.296.0
         with:
           ruby-version: 3.3
       - name: Build and test with Rake
