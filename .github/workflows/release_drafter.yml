@@ -14,11 +14,11 @@ jobs:
       issues: write
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v6.0.2
       - id: get_approvers
         run: |
           echo "approvers=$(cat .github/CODEOWNERS | grep @ | tr -d '* ' | sed 's/@/,/g' | sed 's/,//1')" >> $GITHUB_OUTPUT
-      - uses: trstringer/manual-approval@74d99dff7380e3e4b122d4ededcbca2b6ce59367 # v1
+      - uses: trstringer/manual-approval@74d99dff7380e3e4b122d4ededcbca2b6ce59367 # v1.12.0
         with:
           secret: ${{ github.TOKEN }}
           approvers: ${{ steps.get_approvers.outputs.approvers }}
@@ -27,11 +27,11 @@ jobs:
           issue-body: "Please approve or deny the release **TAG**: ${{ github.ref_name }}  **COMMIT**: ${{ github.sha }}"
           exclude-workflow-initiator-as-approver: true
       - name: Install Ruby
-        uses: ruby/setup-ruby@eab2afb99481ca09a4e91171a8e0aee0e89bfedd # v1
+        uses: ruby/setup-ruby@eab2afb99481ca09a4e91171a8e0aee0e89bfedd # v1.300.0
         with:
           ruby-version: 3.1
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838 # v1
+        uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838 # v6.1.0
         with:
           role-to-assume: ${{ secrets.GET_SECRET_IAM_ROLE }}
           aws-region: us-east-1
@@ -44,7 +44,7 @@ jobs:
           mkdir dist && mv opensearch-ruby-*.gem dist/
           tar -cvf artifacts.tar.gz dist
       - name: Draft a release
-        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v1
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v2.6.1
         with:
           draft: true
           generate_release_notes: true
